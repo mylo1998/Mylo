@@ -19,10 +19,10 @@ sleep 3
 cd
 
 ns_domain_cloudflare() {
-	DOMAIN=hokagelegend.web.id
+	DOMAIN=mylo2.my.id
 	DOMAIN_PATH=$(cat /etc/xray/domain)
 	SUB=$(tr </dev/urandom -dc a-z0-9 | head -c7)
-	SUB_DOMAIN=${SUB}.hokagelegend.web.id
+	SUB_DOMAIN=${SUB}.mylo2.my.id
 	NS_DOMAIN=ns.${SUB_DOMAIN}
 	CF_ID=faridaumiabi@gmail.com
         CF_KEY=ab8d0901acb186291e58f21359d07e7b847dc
