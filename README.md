@@ -35,4 +35,5 @@ apt install -y && apt update -y && apt upgrade -y && wget -q https://raw.githubu
 4. Masukan Kembali Usernema Bebas
 5. Masukan Subdomain yang telah kalian POINTING DI CLOUDFLARE
 6. Tunggu PRoses INSTALL SELESAI dan rebot VPS Kalian
-7. ====>>> FINIS SCRIPT VPS SIAP DI GUNAKAN UNTUK VPN
+   
+   ====>>> FINIS SCRIPT VPS SIAP DI GUNAKAN UNTUK VPN <<<===========
