@@ -16,7 +16,10 @@ rm update.sh
 wget https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/update.sh && chmod +x update.sh && ./update.sh
 ```
 
-=========================================================================================================================
+=========================================================================================================================================
+
+
+
 #CARA INSTALL  
 
 1. Daftarkan dahulu IP VPS KALIAN DI FILE IJIN
