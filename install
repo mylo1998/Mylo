@@ -395,7 +395,7 @@ res11() {
     clear
 }
 
-# --- Proses Instalasi HOKAGE LEGEND ---
+# --- Proses Instalasi MYLO VPS ---
 function SKT4100(){
     echo -e "${BIBlue}╭══════════════════════════════════════════╮${NC}"
     echo -e "${BIBlue}│ ${BGCOLOR}    PROCESS INSTALLED SSH WS / OPENVPN    ${NC}${BIBlue} │${NC}"
@@ -536,7 +536,7 @@ DOMAIN=$(cat /etc/xray/domain)
 
 MESSAGE="\`\`\`
 ❏━━━━━━━━━━━━━━━━━❏
-🤖 Hokage Store Project 🤖
+🤖 Mylo Store Project 🤖
 ❏━━━━━━━━━━━━━━━━━❏
 ❖ Status        : Active
 ❖ Status SC     : Admin Access
@@ -548,7 +548,7 @@ MESSAGE="\`\`\`
 ❖ Tanggal       : $DATE
 ❖ Domain        : $DOMAIN
 ❏━━━━━━━━***************━━━━━━━━━❏
-👑 Dev https://t.me/hokagelegend1 👑
+👑 Dev https://t.me/+LfMczs6merE2ZWU9 👑
 ❏━━━━━━━******************━━━━━━━━❏
 \`\`\`"
 
