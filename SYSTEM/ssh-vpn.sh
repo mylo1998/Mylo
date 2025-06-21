@@ -138,8 +138,8 @@ install_ssl(){
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-curl https://raw.githubusercontent.com/hokagelegend9999/genom/refs/heads/main/SYSTEM/nginx.conf > /etc/nginx/nginx.conf
-curl https://raw.githubusercontent.com/hokagelegend9999/genom/refs/heads/main/SYSTEM/vps.conf > /etc/nginx/conf.d/vps.conf
+curl https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SYSTEM/nginx.conf > /etc/nginx/nginx.conf
+curl https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SYSTEM/vps.conf > /etc/nginx/conf.d/vps.conf
 sudo sed -i 's|listen = /var/run/php-fpm.sock|listen = 127.0.0.1:9000|g' /etc/php/8.3/fpm/pool.d/www.conf
 useradd -m vps;
 mkdir -p /home/vps/public_html
@@ -305,7 +305,7 @@ sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dr
 wget -O /etc/issue.net "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SYSTEM/issue.net"
 
 #install bbr dan optimasi kernel
-wget https://raw.githubusercontent.com/hokagelegend9999/genom/refs/heads/main/SYSTEM/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+wget https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SYSTEM/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 
 # blokir torrent
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
