@@ -43,7 +43,7 @@ check_ip_and_get_info() {
 # =============================================
 
 # Ambil data dari GitHub dengan timeout
-permission_file=$(curl -s --connect-timeout 10 https://raw.githubusercontent.com/hokagelegend9999/ijin/refs/heads/main/gnome)
+permission_file=$(curl -s --connect-timeout 10 https://raw.githubusercontent.com/mylo1998/ijin/refs/heads/main/Mylo)
 
 # Validasi file permission
 if [ -z "$permission_file" ]; then
@@ -204,7 +204,7 @@ function domain() {
 
     # Fungsi instalasi slowdns
     install_slowdns() {
-        local script_url="https://raw.githubusercontent.com/hokagelegend9999/genom/refs/heads/main/SLOWDNS/installsl.sh"
+        local script_url="https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SLOWDNS/installsl.sh"
         local output_file="installsl.sh"
         
         echo -e "${COLOR1}Mengunduh SlowDNS...${NC}"
@@ -463,7 +463,7 @@ case $opt in
 06 |7) clear ; certv2ray ;; 
 07 |8) clear ; gotopp ;; 
 09 |9) clear ; check-port ;; 
-10 |10) clear ; wget -q https://github.com/hokagelegend9999/genom/raw/refs/heads/main/rebuildpepesmenu && bash rebuildpepesmenu ;; 
+10 |10) clear ; wget -q https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/rebuildpepesmenu && bash rebuildpepesmenu ;; 
 00 |0) clear ; menu ;; 
 *) echo -e "" ; echo "Anda salah tekan" ; sleep 1 ; system ;;
 esac
