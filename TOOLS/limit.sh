@@ -1,5 +1,5 @@
 #!/bin/bash
-REPO="https://raw.githubusercontent.com/hokagelegend9999/genom/refs/heads/main/"
+REPO="https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/"
 
 wget -q -O /etc/systemd/system/limitvmess.service "${REPO}TOOLS/limitvmess.service" && chmod +x limitvmess.service >/dev/null 2>&1
 wget -q -O /etc/systemd/system/limitvless.service "${REPO}TOOLS/limitvless.service" && chmod +x limitvless.service >/dev/null 2>&1
@@ -20,7 +20,7 @@ systemctl enable --now limittrojan
 systemctl enable --now limitshadowsocks
 
 cd
-wget -q -O /usr/bin/limit-ip "https://raw.githubusercontent.com/hokagelegend9999/alpha.v2/refs/heads/main/files/limit-ip"
+wget -q -O /usr/bin/limit-ip "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/files/limit-ip"
 chmod +x /usr/bin/*
 cd /usr/bin
 sed -i 's/\r//' limit-ip
