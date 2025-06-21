@@ -1,4 +1,4 @@
-# GENOM SCRIPT VPS INSTALL
+## GENOM SCRIPT VPS INSTALL
 
 
 
@@ -17,7 +17,7 @@ wget https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/update
 ```
 
 =========================================================================================================================
-CARA INSTALL  
+#CARA INSTALL  
 
 1. Daftarkan dahulu IP VPS KALIAN DI FILE IJIN
   ===>>>  https://raw.githubusercontent.com/mylo1998/ijin/refs/heads/main/Mylo
