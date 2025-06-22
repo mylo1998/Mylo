@@ -22,7 +22,7 @@ wget https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/update
 
 # CARA INSTALL  
 
-1. Daftarkan dahulu IP VPS KALIAN DI FILE IJIN
+1. Daftarkan dahulu IP VPS KALIAN DI FILE IZIN
   ===>>>  https://raw.githubusercontent.com/mylo1998/ijin/refs/heads/main/Mylo
 
 2. Copy Paste file Installer kalian di VPS
