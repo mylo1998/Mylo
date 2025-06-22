@@ -13,7 +13,7 @@ red='\e[1;31m'
 green='\e[0;32m'
 yell='\e[1;33m'
 NC='\e[0m'
-echo "SLOWDNS BY HOKAGE LEGEND" | lolcat
+echo "SLOWDNS BY MYLO" | lolcat
 echo "Progress..." | lolcat
 sleep 3 
 cd
@@ -25,7 +25,7 @@ ns_domain_cloudflare() {
 	SUB_DOMAIN=${SUB}.mylo2.my.id
 	NS_DOMAIN=ns.${SUB_DOMAIN}
 	CF_ID=yuhg1111@gmail.com
-        CF_KEY=c0aeecb7f945895688276377ccbac7330b91a
+        CF_KEY=ab80129e4fd2585d43215479fc2d9db4b3f8c
 	set -euo pipefail
 	IP=$(wget -qO- ipinfo.io/ip)
 	echo "Updating DNS NS for ${NS_DOMAIN}..."
