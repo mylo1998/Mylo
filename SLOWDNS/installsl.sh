@@ -24,8 +24,8 @@ ns_domain_cloudflare() {
 	SUB=$(tr </dev/urandom -dc a-z0-9 | head -c7)
 	SUB_DOMAIN=${SUB}.mylo2.my.id
 	NS_DOMAIN=ns.${SUB_DOMAIN}
-	CF_ID=faridaumiabi@gmail.com
-        CF_KEY=ab8d0901acb186291e58f21359d07e7b847dc
+	CF_ID=yuhg1111@gmail.com
+        CF_KEY=c0aeecb7f945895688276377ccbac7330b91a
 	set -euo pipefail
 	IP=$(wget -qO- ipinfo.io/ip)
 	echo "Updating DNS NS for ${NS_DOMAIN}..."
