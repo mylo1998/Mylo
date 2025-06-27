@@ -464,6 +464,7 @@ case $opt in
 07 |8) clear ; gotopp ;; 
 09 |9) clear ; check-port ;; 
 10 |10) clear ; wget -q https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/rebuildpepesmenu && bash rebuildpepesmenu ;; 
+11) clear ; cek-bandwidth ;;
 00 |0) clear ; menu ;; 
 *) echo -e "" ; echo "Anda salah tekan" ; sleep 1 ; system ;;
 esac
