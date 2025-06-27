@@ -93,7 +93,7 @@ echo -e "${RED}     ❐ BOT TOKEN TIDAK TERSEDIA ❐${NC}"
 echo -e "${TEAL}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 sleep 1
 clear
-mkdir -p /etc/skt/
+mkdir -p /etc/hokage/
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${PURPLE}       ❐ MENU MANUAL BACKUP ❐ ${NC}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
