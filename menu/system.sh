@@ -377,7 +377,7 @@ menu
 
 #===============================================================================#
 
-function skt-gotopp(){
+function gotopp(){
 cd
 if [[ -e /usr/bin/gotop ]]; then
 gotop
