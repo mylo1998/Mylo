@@ -44,7 +44,6 @@ export UNDERLINE="\e[4m"
 
 # // Exporting URL Host
 export Server_URL="raw.githubusercontent.com/urak"
-export Server1_URL="raw.githubusercontent.com/limit"
 export Server_Port="443"
 export Server_IP="underfined"
 export Script_Mode="Stable"
