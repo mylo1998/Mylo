@@ -63,6 +63,7 @@ rm -rf insshws
 rm -rf online
 rm -rf trialtrojan
 rm -rf ceklimit
+rm -rf trojan-online
 
 fun_bar() {
     CMD[0]="$1"
@@ -125,6 +126,7 @@ wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/mylo1998/Mylo/refs/
 wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
 wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
 wget -q -O /usr/bin/ceklimit "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/ceklimit" && chmod +x /usr/bin/ceklimit
+wget -q -O /usr/bin/trojan-online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trojan-online" && chmod +x /usr/bin/trojan-online
 
 chmod +x m-tcp
 chmod +x m-theme
