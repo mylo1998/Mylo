@@ -126,6 +126,9 @@ wget -q -O /usr/bin/trialvless "https://raw.githubusercontent.com/mylo1998/Mylo/
 wget -q -O /usr/bin/trialtrojan "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialvless.sh" && chmod +x /usr/bin/trialvless
 wget -q -O /usr/bin/trialssh "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialssh.sh" && chmod +x /usr/bin/trialssh
 wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trial.sh" && chmod +x /usr/bin/trial
+wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
+wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
+wget -q -O /usr/bin/ceklimit "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/ceklimit" && chmod +x /usr/bin/ceklimit
 
 clear
 echo -e ""
