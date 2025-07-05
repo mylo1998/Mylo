@@ -60,6 +60,9 @@ rm -rf trojan
 rm -rf vless
 rm -rf vmess
 rm -rf insshws
+rm -rf online
+rm -rf trialtrojan
+rm -rf ceklimit
 
 fun_bar() {
     CMD[0]="$1"
@@ -92,7 +95,7 @@ wow() {
 
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/menu.sh" && chmod +x /usr/bin/menu
 wget -q -O /usr/bin/update "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/update.sh" && chmod +x /usr/bin/update
-wget -q -O /usr/bin/m-tcp "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/m-tcp.sh" && chmod +x /usr/bin/m-tcp
+wget -q -O /usr/bin/m-tcp "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/m-tcp.sh" && chmod +x /usr/bin/m-tcp
 
 wget -q -O /usr/bin/m-theme "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/m-theme.sh" && chmod +x /usr/bin/m-theme
 wget -q -O /usr/bin/m-vmess "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/m-vmess.sh" && chmod +x /usr/bin/m-vmess
@@ -119,6 +122,9 @@ wget -q -O /usr/bin/trialvless "https://raw.githubusercontent.com/mylo1998/Mylo/
 wget -q -O /usr/bin/trialtrojan "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialvless.sh" && chmod +x /usr/bin/trialvless
 wget -q -O /usr/bin/trialssh "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialssh.sh" && chmod +x /usr/bin/trialssh
 wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trial.sh" && chmod +x /usr/bin/trial
+wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
+wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
+wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
 
 chmod +x m-tcp
 chmod +x m-theme
