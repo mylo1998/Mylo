@@ -368,6 +368,10 @@ echo -e "$COLOR1│ ${WH}[${COLOR1}03${WH}]${NC} ${COLOR1}• ${WH}VLESS    ${WH
 echo -e "$COLOR1│ ${WH}[${COLOR1}04${WH}]${NC} ${COLOR1}• ${WH}TRJAN    ${WH}[${COLOR1}Menu${WH}]     ${WH}[${COLOR1}09${WH}]${NC} ${COLOR1}• ${WH}UPDATE   ${WH}[${COLOR1}Menu${WH}]$COLOR1 │ $NC"
 echo -e "$COLOR1│ ${WH}[${COLOR1}05${WH}]${NC} ${COLOR1}• ${WH}BACKUP   ${WH}[${COLOR1}Menu${WH}]     ${WH}[${COLOR1}10${WH}]${NC} ${COLOR1}• ${WH}SETTING  ${WH}[${COLOR1}Menu${WH}]$COLOR1 │ $NC"
 echo -e "$COLOR1│                                                   $COLOR1│ $NC"
+echo -e "${RED}╭═══════${ORANGE}══════ • ${YELLOW}CHECK USER ONLINE${GREEN} • ${CYAN}═══════════════╮${NC}"
+echo -e "${RED}│PILIH NOMOR${NC} ${YELLOW}[12] ${GREEN}🔍 MELIHAT USER ONLINE STATUS USER${NC}│ "
+echo -e "${CYAN}╰══${GREEN}==================${YELLOW}══=======${ORANGE}══════════════════════${RED}╯${NC}"
+echo -e "$COLOR1│                                                   $COLOR1│ $NC"
 echo -e "$COLOR1╰═══════════════════════════════════════════════════╯${NC}"
 echo -e "$COLOR1╭═══════════════════════════════════════════════════╮${NC}"
 echo -e "$COLOR1│ ${WH}Traffic${NC}      ${WH}Today     Yesterday       Month       ${NC}"
@@ -395,6 +399,7 @@ case $opt in
 09 | 9) clear ; m-update ;;
 10 | 10) clear ; system ;;
 11 | 11) clear ; menu-backup;;
+12 | 12) clear ; online;;
 00 | 0) clear ; menu ;;
 *) clear ; menu ;;
 esac
