@@ -15,12 +15,12 @@ BUFLEN = 4096 * 4
 TIMEOUT = 60
 DEFAULT_HOST = '127.0.0.1:109'
 
-# RESPONSE HTTP 101 Switching Protocols (Telah Dihapus 'HOKAGE LEGEND YOUTUBE' dari sini)
+# RESPONSE HTTP 101 Switching Protocols (Telah Dihapus 'MYLO STORE' dari sini)
 RESPONSE = 'HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: foo\r\n\r\n'.encode('latin-1')
 
 # CUSTOM MESSAGE YANG AKAN DIKIRIM SETELAH HANDSHAKE WEBSOCKET
 CUSTOM_STARTUP_MESSAGE = """\
-HOKAGE LEGEND STORE
+MYLO STORE
 ═══════⊹⊱✫⊰⊹══════
 ✅ 1 LOGIN DEVICE !!!
 ✅ NO DDOS !!!
@@ -28,8 +28,8 @@ HOKAGE LEGEND STORE
 ✅ NO MULTILOGIN !!!
 ✅ NO PORN18+ !!!
 ═══════⊹⊱✫⊰⊹══════ ➪
-Trial/Order Hubungi : ➪ WhatsApp : https://wa.me/087726917005
-➪ HOKAGE PREMIUM
+Trial/Order Hubungi : ➪ TELEGRAM : https:t.me/VipConfigOnly
+➪ MYLO PREMIUM
 """.encode('utf-8')
 
 class Server(threading.Thread):
