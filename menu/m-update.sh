@@ -115,7 +115,7 @@ wget -q -O /usr/bin/m-update "https://raw.githubusercontent.com/mylo1998/Mylo/re
 wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/tendang.sh" && chmod +x /usr/bin/tendang
 wget -q -O /usr/bin/check-port "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/check-port.sh" && chmod +x /usr/bin/check-port
 
-wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/menu-backup.sh" && chmod +x /usr/bin/menu-backup
+wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/menu-backup" && chmod +x /usr/bin/menu-backup
 wget -q -O /usr/bin/auto-backup "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/auto-backup.sh" && chmod +x /usr/bin/auto-backup
 wget -q -O /usr/bin/auto-restore "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/auto-restore.sh" && chmod +x /usr/bin/auto-restore
 wget -q -O /usr/bin/manual-backup "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/manual-backup.sh" && chmod +x /usr/bin/manual-backup
