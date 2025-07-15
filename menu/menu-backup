@@ -51,6 +51,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "" 
 echo -e " [\e[36m•1\e[0m] Backup VPS Data"
 echo -e " [\e[36m•2\e[0m] Restore VPS Data"
+echo -e " [\e[36m•3\e[0m] Jadwal Backup"
 echo -e "" 
 echo -e " [\e[31m•0\e[0m] \e[31mBack To Menu\033[0m"
 echo -e "" 
@@ -61,6 +62,7 @@ echo -e   ""
 case $opt in
 01 | 1) clear ; backup ;;
 02 | 2) clear ; restore ;;
+02 | 3) clear ; atur-backup ;;
 00 | 0) clear ; menu ;;
 *) clear ; menu-backup ;;
 esac
