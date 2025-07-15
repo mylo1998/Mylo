@@ -130,6 +130,9 @@ wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main
 wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
 wget -q -O /usr/bin/ceklimit "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/ceklimit" && chmod +x /usr/bin/ceklimit
 wget -q -O /usr/bin/trojan-online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trojan-online" && chmod +x /usr/bin/trojan-online
+wget -q -O /usr/bin/atur-backup "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/atur-backup" && chmod +x /usr/bin/atur-backup
+wget -q -O /usr/bin/online-xray "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-xray" && chmod +x /usr/bin/online-xray
+wget -q -O /usr/bin/online-trojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-trojan" && chmod +x /usr/bin/online-trojan
 
 
 clear
