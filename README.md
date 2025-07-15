@@ -38,4 +38,4 @@ apt install -y && apt update -y && apt upgrade -y && wget -q https://raw.githubu
    
    ====>>> FINIS SCRIPT VPS SIAP DI GUNAKAN UNTUK VPN <<<===========
 
-   #### LAST UPDATE 15-07-2025
+   #### *********** LAST UPDATE 15-07-2025 **************
