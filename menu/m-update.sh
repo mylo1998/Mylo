@@ -64,6 +64,10 @@ rm -rf online
 rm -rf trialtrojan
 rm -rf ceklimit
 rm -rf trojan-online
+rm -rf online-xray
+rm -rf online-trojan
+rm -rf atur-backup
+
 
 fun_bar() {
     CMD[0]="$1"
@@ -127,6 +131,9 @@ wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main
 wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
 wget -q -O /usr/bin/ceklimit "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/ceklimit" && chmod +x /usr/bin/ceklimit
 wget -q -O /usr/bin/trojan-online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trojan-online" && chmod +x /usr/bin/trojan-online
+wget -q -O /usr/bin/atur-backup "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/atur-backup" && chmod +x /usr/bin/atur-backup
+wget -q -O /usr/bin/online-xray "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-xray" && chmod +x /usr/bin/online-xray
+wget -q -O /usr/bin/online-trojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-trojan" && chmod +x /usr/bin/online-trojan
 
 chmod +x m-tcp
 chmod +x m-theme
@@ -172,6 +179,13 @@ chmod +x trojan
 chmod +x vless
 chmod +x vmess
 chmod +x insshws
+chmod +x online
+chmod +x trialtrojan
+chmod +x ceklimit
+chmod +x trojan-online
+chmod +x online-xray
+chmod +x online-trojan
+chmod +x atur-backup
 clear
 
 }
