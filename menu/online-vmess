@@ -3,7 +3,7 @@
 clear
 
 # =============================================
-#           [ Konfigurasi Warna ]
+#         [ Konfigurasi Warna ]
 # =============================================
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -30,44 +30,46 @@ function con() {
 
 # Header dengan background biru dan teks putih
 echo -e "${BLUE}┌─────────────────────────────────────────────────┐${NC}"
-echo -e "${BLUE}│${NC}${BG_BLUE}${WHITE}             • TROJAN USER ONLINE •              ${NC}${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}${BG_BLUE}${WHITE}          • VMESS USER ONLINE •             ${NC}${BLUE}│${NC}"
 echo -e "${BLUE}└─────────────────────────────────────────────────┘${NC}"
 
-# Inisialisasi
-echo -n > /tmp/other.txt
-data=( $(grep "^#trg" /etc/xray/config.json | cut -d ' ' -f 2 | sort | uniq) )
+# =================================================================
+# PERUBAHAN 1: Cara menemukan pengguna Vmess disesuaikan
+# Mencari pengguna dengan penanda #vm atau #vmg
+# =================================================================
+data=( $(grep -E "^#vm |^#vmg " /etc/xray/config.json | cut -d ' ' -f 2 | sort | uniq) )
 
 for akun in "${data[@]}"; do
     [[ -z "$akun" ]] && continue
 
-    echo -n > /tmp/iptrojan.txt
+    # Menggunakan file temporary yang berbeda untuk vmess
+    echo -n > /tmp/ipvmess.txt
     data2=( $(tail -n 500 /var/log/xray/access.log | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq) )
 
     for ip in "${data2[@]}"; do
         jum=$(grep -w "$akun" /var/log/xray/access.log | tail -n 500 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | grep -w "$ip" | sort | uniq)
         if [[ "$jum" == "$ip" ]]; then
-            echo "$jum" >> /tmp/iptrojan.txt
-        else
-            echo "$ip" >> /tmp/other.txt
+            echo "$jum" >> /tmp/ipvmess.txt
         fi
-        jum2=$(cat /tmp/iptrojan.txt)
-        sed -i "/$jum2/d" /tmp/other.txt > /dev/null 2>&1
     done
 
-    jum=$(cat /tmp/iptrojan.txt)
+    jum=$(cat /tmp/ipvmess.txt)
     if [[ -n "$jum" ]]; then
-        akun_file="/etc/trojan/akun/${akun}"
-        limit_file="/etc/limit/trojan/${akun}"
-        quota_file="/etc/trojan/${akun}"
+        # =================================================================
+        # PERUBAHAN 2: Cara membaca file limit IP disesuaikan
+        # =================================================================
+        akun_file="/etc/vmess/${akun}IP"
+        limit_file="/etc/limit/vmess/${akun}"
+        quota_file="/etc/vmess/${akun}"
 
         # Data IP limit
         if [[ -f "$akun_file" ]]; then
-            iplimit=$(grep ^login_ip "$akun_file" | cut -d= -f2)
+            iplimit=$(cat "$akun_file")
         else
             iplimit="?"
         fi
 
-        # Data limit & usage
+        # Data limit & usage (Tidak ada perubahan di sini)
         if [[ -f "$limit_file" ]]; then
             wey=$(cat "$limit_file")
             gb=$(con "$wey")
@@ -83,7 +85,7 @@ for akun in "${data[@]}"; do
         fi
 
         lastlogin=$(grep -w "$akun" /var/log/xray/access.log | tail -n 500 | cut -d " " -f 2 | tail -1)
-        jum2=$(wc -l < /tmp/iptrojan.txt)
+        jum2=$(wc -l < /tmp/ipvmess.txt)
 
         # Tampilkan info akun
         echo -e "${CYAN} ┌──────────────────────────────────────┐${NC}"
@@ -96,10 +98,8 @@ for akun in "${data[@]}"; do
         echo -e "${CYAN} └──────────────────────────────────────┘${NC}"
     fi
 
-    rm -f /tmp/iptrojan.txt
+    rm -f /tmp/ipvmess.txt
 done
-
-rm -f /tmp/other.txt
 
 # Footer
 echo ""
