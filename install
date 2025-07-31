@@ -529,26 +529,33 @@ cd
 # --- Kirim Pesan Sukses ke Telegram ---
 IPVPS=$(curl -s https://ipinfo.io/ip)
 HOSTNAME=$(hostname)
+USERVPS=$(whoami)
 OS=$(lsb_release -d | awk '{print $2,$3,$4}')
 ISP=$(curl -s https://ipinfo.io/org | awk '{print $2,$3,$4}')
 REGION=$(curl -s ipinfo.io/region)
+USER=$client_name
 DATE=$(date '+%Y-%m-%d')
 TIME=$(date '+%H:%M:%S')
 DOMAIN=$(cat /etc/xray/domain)
+exp_date=$(echo "$permission_file" | grep -w "$client_name" | awk '{print $3}')
 
 MESSAGE="\`\`\`
-❏━━━━━━━━━━━━━━━━━❏
-🤖 Mylo Store Project 🤖
-❏━━━━━━━━━━━━━━━━━❏
+❏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━❏
+   🤖 Mylo Store Project 🤖
+❏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━❏
 ❖ Status        : Active
-❖ Status SC     : Admin Access
+❖ Status SC     : Genom V 3.1
+❖ User VPS      : $USERVPS
+❖ Owner SC      : MyLo
 ❖ Linux OS      : $OS
 ❖ ISP           : $ISP
 ❖ IP VPS        : $IPVPS
+❖ HOST VPS      : $HOSTNAME
 ❖ Area ISP      : $REGION
 ❖ Waktu         : $TIME
 ❖ Tanggal       : $DATE
 ❖ Domain        : $DOMAIN
+❖ Expired       : $exp_date
 ❏━━━━━━━━***************━━━━━━━━━❏
 👑 Dev https://t.me/+LfMczs6merE2ZWU9 👑
 ❏━━━━━━━******************━━━━━━━━❏
