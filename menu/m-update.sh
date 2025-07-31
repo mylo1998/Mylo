@@ -63,10 +63,16 @@ rm -rf insshws
 rm -rf online
 rm -rf trialtrojan
 rm -rf ceklimit
-rm -rf trojan-online
 rm -rf online-xray
-rm -rf online-trojan
 rm -rf atur-backup
+rm -rf backup
+rm -rf restore
+rm -rf admin
+rm -rf online-vmess
+rm -rf online-vless
+rm -rf online-troja
+rm -rf online-sshws
+rm -rf update-usage
 
 
 fun_bar() {
@@ -123,17 +129,23 @@ wget -q -O /usr/bin/manual-restore "https://raw.githubusercontent.com/mylo1998/M
 
 wget -q -O /usr/bin/xraylimit "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/xraylimit.sh" && chmod +x /usr/bin/xraylimit
 wget -q -O /usr/bin/trialvmess "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialvmess.sh" && chmod +x /usr/bin/trialvmess
-wget -q -O /usr/bin/trialvless "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialtrojan.sh" && chmod +x /usr/bin/trialtrojan
-wget -q -O /usr/bin/trialtrojan "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialvless.sh" && chmod +x /usr/bin/trialvless
+wget -q -O /usr/bin/trialvless "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialvless.sh" && chmod +x /usr/bin/trialvless
 wget -q -O /usr/bin/trialssh "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialssh.sh" && chmod +x /usr/bin/trialssh
 wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trial.sh" && chmod +x /usr/bin/trial
 wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
 wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
 wget -q -O /usr/bin/ceklimit "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/ceklimit" && chmod +x /usr/bin/ceklimit
-wget -q -O /usr/bin/trojan-online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trojan-online" && chmod +x /usr/bin/trojan-online
+wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
 wget -q -O /usr/bin/atur-backup "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/atur-backup" && chmod +x /usr/bin/atur-backup
 wget -q -O /usr/bin/online-xray "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-xray" && chmod +x /usr/bin/online-xray
+wget -q -O /usr/bin/backup "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/backup" && chmod +x /usr/bin/backup
+wget -q -O /usr/bin/restore "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/restore" && chmod +x /usr/bin/restore
+wget -q -O /usr/bin/admin "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/admin" && chmod +x /usr/bin/admin
+wget -q -O /usr/bin/online-vmess "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-vmess" && chmod +x /usr/bin/online-vmess
+wget -q -O /usr/bin/online-vless "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-vless" && chmod +x /usr/bin/online-vless
 wget -q -O /usr/bin/online-trojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-trojan" && chmod +x /usr/bin/online-trojan
+wget -q -O /usr/bin/online-sshws "https://github.com/mylo1998/Mylo/raw/refs/heads/main/online-sshws" && chmod +x /usr/bin/online-sshws
+wget -q -O /usr/bin/update-usage "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/update-usage" && chmod +x /usr/bin/update-usage
 
 chmod +x m-tcp
 chmod +x m-theme
@@ -182,10 +194,16 @@ chmod +x insshws
 chmod +x online
 chmod +x trialtrojan
 chmod +x ceklimit
-chmod +x trojan-online
 chmod +x online-xray
-chmod +x online-trojan
 chmod +x atur-backup
+chmod +x backup
+chmod +x restore
+chmod +x admin
+chmod +x online-vmess
+chmod +x online-vless
+chmod +x online-troja
+chmod +x online-sshws
+chmod +x update-usage
 clear
 
 }
