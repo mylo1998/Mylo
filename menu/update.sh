@@ -126,14 +126,19 @@ wget -q -O /usr/bin/trialvless "https://raw.githubusercontent.com/mylo1998/Mylo/
 wget -q -O /usr/bin/trialtrojan "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialvless.sh" && chmod +x /usr/bin/trialvless
 wget -q -O /usr/bin/trialssh "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trialssh.sh" && chmod +x /usr/bin/trialssh
 wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/trial.sh" && chmod +x /usr/bin/trial
-wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
 wget -q -O /usr/bin/trialtrojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trialtrojan" && chmod +x /usr/bin/trialtrojan
 wget -q -O /usr/bin/ceklimit "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/ceklimit" && chmod +x /usr/bin/ceklimit
-wget -q -O /usr/bin/trojan-online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/trojan-online" && chmod +x /usr/bin/trojan-online
+wget -q -O /usr/bin/online "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online" && chmod +x /usr/bin/online
 wget -q -O /usr/bin/atur-backup "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/atur-backup" && chmod +x /usr/bin/atur-backup
 wget -q -O /usr/bin/online-xray "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-xray" && chmod +x /usr/bin/online-xray
+wget -q -O /usr/bin/backup "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/backup" && chmod +x /usr/bin/backup
+wget -q -O /usr/bin/restore "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/restore" && chmod +x /usr/bin/restore
+wget -q -O /usr/bin/admin "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/admin" && chmod +x /usr/bin/admin
+wget -q -O /usr/bin/online-vmess "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-vmess" && chmod +x /usr/bin/online-vmess
+wget -q -O /usr/bin/online-vless "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-vless" && chmod +x /usr/bin/online-vless
 wget -q -O /usr/bin/online-trojan "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-trojan" && chmod +x /usr/bin/online-trojan
-
+wget -q -O /usr/bin/online-sshws "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/online-sshws" && chmod +x /usr/bin/online-sshws
+wget -q -O /usr/bin/update-usage "https://github.com/mylo1998/Mylo/raw/refs/heads/main/menu/update-usage" && chmod +x /usr/bin/update-usage
 
 clear
 echo -e ""
