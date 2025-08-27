@@ -1,8 +1,8 @@
-## GENOM SCRIPT VPS INSTALL
+## Mylo SCRIPT VPS INSTALL
 
 
 
-## 1 INSTALL SCRIPT GNOM 
+## 1 INSTALL SCRIPT 
 
 ```
 apt install -y && apt update -y && apt upgrade -y && wget -q https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/install && chmod +x install  && ./install 
@@ -17,25 +17,3 @@ wget https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/update
 ```
 
 =========================================================================================================================================
-
-
-
-# CARA INSTALL  
-
-1. Daftarkan dahulu IP VPS KALIAN DI FILE IZIN
-  ===>>>  https://raw.githubusercontent.com/mylo1998/ijin/refs/heads/main/Mylo
-
-2. Copy Paste file Installer kalian di VPS
-   ====>>>
-   
-```
-apt install -y && apt update -y && apt upgrade -y && wget -q https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/install && chmod +x install  && ./install 
-```
-3. Masukan Nama Kalian Sesuai yang di daftarkan di IP VPS IJIN
-4. Masukan Kembali Usernema Bebas
-5. Masukan Subdomain yang telah kalian POINTING DI CLOUDFLARE
-6. Tunggu PRoses INSTALL SELESAI dan rebot VPS Kalian
-   
-   ====>>> FINIS SCRIPT VPS SIAP DI GUNAKAN UNTUK VPN <<<===========
-
-   #### *********** LAST UPDATE 15-07-2025 **************
