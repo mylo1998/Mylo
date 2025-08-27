@@ -15,5 +15,3 @@ cd root
 rm update.sh
 wget https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/menu/update.sh && chmod +x update.sh && ./update.sh
 ```
-
-=========================================================================================================================================
