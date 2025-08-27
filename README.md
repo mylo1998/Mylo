@@ -5,7 +5,7 @@
 ## 1 INSTALL SCRIPT 
 
 ```
-apt install -y && apt update -y && apt upgrade -y && wget -q https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/install && chmod +x install  && ./install 
+apt --fix-missing update && apt update && apt upgrade -y && apt install -y bzip2 gzip coreutils screen dpkg wget vim curl nano zip unzip && wget -q https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/install && chmod +x install  && ./install  
 ```
 
 ## 2. UPDATE 
