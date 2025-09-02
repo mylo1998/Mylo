@@ -113,10 +113,9 @@ CHAT_ID="1469244768"
 # --- Fungsi untuk Mengirim Pesan ke Telegram ---
 send_telegram_message() {
     MESSAGE=$1
-    BUTTON1_URL="https://t.me/hokagelegend1"
-    BUTTON2_URL="https://wa.me/087726917005"
+    BUTTON1_URL="https://t.me/EncikKatakvps"
     BUTTON_TEXT1="Telegram 😎"
-    BUTTON_TEXT2="Whatsapp 🐳"
+    
 
     RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
         -d chat_id="$CHAT_ID" \
