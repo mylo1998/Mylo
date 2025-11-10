@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Instalasi v2ray
+bash <(curl -Ls https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+
+# Konfigurasi multipath dan http upgraded
+MULTIPATH_CONFIG="
+{
+  \"inbounds\": [
+    {
+      \"port\": 8080,
+      \"protocol\": \"vless\",
+      \"settings\": {
+        \"clients\": [
+          {
+            \"id\": \"919da0e6-a71d-405c-8365-9ddf190f6bdd\",
+            \"level\": 0
+          }
+        ],
+        \"decryption\": \"none\",
+        \"multipath\": {
+          \"enabled\": true,
+          \"addresses\": []
+          ]
+        }
+      },
+      \"streamSettings\": {
+        \"network\": \"tcp\",
+        \"security\": \"tls\",
+        \"tlsSettings\": {
+          \"certificates\": [
+            {
+              \"certificateFile\": \"/path/to/cert.crt\",
+              \"keyFile\": \"/path/to/cert.key\"
+            }
+          ]
+        },
+        \"httpSettings\": {
+          \"path\": \"/ws\",
+          \"host\": []
+        },
+        \"wsSettings\": {
+          \"path\": \"/ws\",
+          \"headers\": {
+            \"Host\": []
+          }
+        }
+      }
+    }
+  ]
+}
+"
+
+# Buat file konfigurasi
+echo "$MULTIPATH_CONFIG" > /etc/v2ray/config.json
+
+# Restart v2ray
+systemctl restart v2ray
