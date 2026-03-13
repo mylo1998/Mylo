@@ -143,7 +143,7 @@ cat > /etc/xray/config.json << END
        "streamSettings":{
          "network": "ws",
             "wsSettings": {
-                "path": "/path1","/vless","/vlessws
+                "path": "/vlessws"
           }
         }
      },
