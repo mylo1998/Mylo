@@ -380,7 +380,7 @@ EOF
 #nginx config
 rm -f /etc/nginx/nginx.conf
 cd /etc/nginx
-wget -O nginx.conf "https://raw.githubusercontent.com/mylo1998/Mylo/blob/main/SYSTEM/ins-xray.sh/mylo1998/Mylo/blob/main/SYSTEM/ins-xray.sh"
+wget -O nginx.conf "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SYSTEM/ins-xray.sh"
 sed -i "s|rere.com|${domain}|g" /etc/nginx/nginx.conf
 cd
 
