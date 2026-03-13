@@ -378,12 +378,7 @@ WantedBy=multi-user.target
 EOF
 
 #nginx config
-rm -f /etc/nginx/nginx.conf
-cd /etc/nginx
-wget -O nginx.conf "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/SYSTEM/nginx.conf"
-sed -i "s|rere.com|${domain}|g" /etc/nginx/nginx.conf
-cd
- cat >/etc/nginx/conf.d/xray.conf <<EOF
+cat >/etc/nginx/conf.d/xray.conf <<EOF
     server {
              listen 80;
              listen [::]:80;
@@ -495,11 +490,6 @@ echo -e "$yell[SERVICE]$NC Restart All service"
 systemctl daemon-reload
 sleep 0.5
 echo -e "[ ${green}ok${NC} ] Enable & restart xray "
-
-echo -e "$yell[SERVICE]$NC Restart All service"
-systemctl daemon-reload
-sleep 0.5
-echo -e "[ ${green}ok${NC} ] Enable & restart xray "
 systemctl daemon-reload
 systemctl enable xray
 systemctl restart xray
@@ -515,6 +505,9 @@ yellow "xray/Vless"
 mv /root/domain /etc/xray/
 if [ -f /root/scdomain ];then
 rm /root/scdomain > /dev/null 2>&1
+fi
+clear
+rm -f ins-xray.sh.
 fi
 clear
 rm -f ins-xray.sh
