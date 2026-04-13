@@ -836,63 +836,34 @@ fi
 }
 function cek-vless(){
 clear
-local -i bytes=$1;
-    if [[ $bytes -lt 1024 ]]; then
-        echo "${bytes}B"
-    elif [[ $bytes -lt 1048576 ]]; then
-        echo "$(( (bytes + 1023)/1024 ))KB"
-    elif [[ $bytes -lt 1073741824 ]]; then
-        echo "$(( (bytes + 1048575)/1048576 ))MB"
-    else
-        echo "$(( (bytes + 1073741823)/1073741824 ))GB"
-    fi
-}
-echo -n > /tmp/other.txt
-data=( `cat /etc/xray/config.json | grep '#&' | cut -d ' ' -f 2 | sort | uniq`);
-echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e " \e[1;97;101m           CEK VLESS ACCOUNT            \e[0m"
-echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-for akun in "${data[@]}"
-do
-if [[ -z "$akun" ]]; then
-akun="tidakada"
+xrayy=$(cat /var/log/xray/access.log | wc -l)
+if [[ xrayy -le 5 ]]; then
+systemctl restart xray
 fi
-echo -n > /tmp/ipvless.txt
-data2=( `cat /var/log/xray/access.log | tail -n 500 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq`);
-for ip in "${data2[@]}"
-do
-jum=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 500 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | grep -w "$ip" | sort | uniq)
-if [[ "$jum" = "$ip" ]]; then
-echo "$jum" >> /tmp/ipvless.txt
-else
-echo "$ip" >> /tmp/other.txt
-fi
-jum2=$(cat /tmp/ipvless.txt)
-sed -i "/$jum2/d" /tmp/other.txt > /dev/null 2>&1
-done
-jum=$(cat /tmp/ipvless.txt)
-if [[ -z "$jum" ]]; then
-echo > /dev/null
-else
-iplimit=$(cat /etc/kyt/limit/vless/ip/${akun})
-jum2=$(cat /tmp/ipvless.txt | wc -l)
-byte=$(cat /etc/vless/${akun})
-lim=$(con ${byte})
-wey=$(cat /etc/limit/vless/${akun})
-gb=$(con ${wey})
-lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 500 | cut -d " " -f 2 | tail -1)
-echo -e " \033[1;36m┌──────────────────────────────────────┐\033[0m"
-printf "  %-13s %-7s %-8s %2s\n" "  UserName : ${akun}"
-printf "  %-13s %-7s %-8s %2s\n" "  Login    : $lastlogin"
-printf "  %-13s %-7s %-8s %2s\n" "  Usage Quota : ${gb}" 
-printf "  %-13s %-7s %-8s %2s\n" "  Limit Quota : ${lim}" 
-printf "  %-13s %-7s %-8s %2s\n" "  Limit IP : $iplimit" 
-printf "  %-13s %-7s %-8s %2s\n" "  Login IP : $jum2" 
-echo -e " \033[1;36m└──────────────────────────────────────┘\033[0m"
-fi 
-rm -rf /tmp/ipvless.txt
-done
-rm -rf /tmp/other.txt
+xraylimit
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1│${NC}${COLBG1}             ${WH}• VLESS USER ONLINE •               ${NC}$COLOR1│ $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+vm=($(cat /etc/xray/config.json | grep "^#vlg#" | awk '{print $2}' | sort -u))
+echo -n >/tmp/vm
+for db1 in ${vm[@]}; do
+logvm=$(cat /var/log/xray/access.log | grep -w "email: ${db1}" | tail -n 100)
+while read a; do
+if [[ -n ${a} ]]; then
+set -- ${a}
+ina="${7}"
+inu="${2}"
+anu="${3}"
+enu=$(echo "${anu}" | sed 's/tcp://g' | sed '/^$/d' | cut -d. -f1,2,3)
+now=$(tim2sec ${timenow})
+client=$(tim2sec ${inu})
+nowt=$(((${now} - ${client})))
+if [[ ${nowt} -lt 40 ]]; then
+cat /tmp/vm | grep -w "${ina}" | grep -w "${enu}" >/dev/null
+if [[ $? -eq 1 ]]; then
+echo "${ina} ${inu} WIB : ${enu}" >>/tmp/vm
+splvm=$(cat /tmp/vm)
 echo ""
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
