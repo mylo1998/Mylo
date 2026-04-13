@@ -868,7 +868,6 @@ fi
 fi
 fi
 done <<<"${logvm}"
-done
 if [[ ${splvm} != "" ]]; then
 for vmuser in ${vm[@]}; do
 vmhas=$(cat /tmp/vm | grep -w "${vmuser}" | wc -l)
