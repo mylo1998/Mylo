@@ -57,6 +57,7 @@ IP_VPS=$(curl -s ipv4.icanhazip.com)
 # =============================================
 echo -e "${GREEN}⌛ Memeriksa lisensi...${NC}"
 if check_ip_and_get_info "$IP_VPS"; then
+    exp_date="LIFETIME"
     
     # Validasi format tanggal ISO 8601
     if [[ "$exp_date"!= "LIFETIME"; then
@@ -66,6 +67,7 @@ if check_ip_and_get_info "$IP_VPS"; then
     fi
 
     # Validasi tanggal menggunakan date
+    if [[ "exp_date"!= "LIFETIME" ]]; then
     if ! date -d "$exp_date" "+%s" &>/dev/null; then
         echo -e "${RED}❌ Tanggal tidak valid secara kalender: $exp_date${NC}"
         exit 1
