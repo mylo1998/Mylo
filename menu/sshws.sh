@@ -853,7 +853,7 @@ read -rp "Select one client [1]: " CLIENT_NUMBER
 else
 read -rp "Select one client [1-${NUMBER_OF_CLIENTS}]: " CLIENT_NUMBER
 if [[ ${CLIENT_NUMBER} == '0' ]]; then
-which skt-sshws
+skt-sshws
 fi
 fi
 done
