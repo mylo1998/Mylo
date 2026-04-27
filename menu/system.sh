@@ -58,7 +58,6 @@ IP_VPS=$(curl -s ipv4.icanhazip.com)
 # =============================================
 echo -e "${GREEN}⌛ Memeriksa lisensi...${NC}"
 if check_ip_and_get_info "$IP_VPS"; then
-    exp_date="LIFETIME"
     
     # Validasi format tanggal ISO 8601
     
