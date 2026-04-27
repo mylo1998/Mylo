@@ -59,7 +59,7 @@ echo -e "${GREEN}⌛ Memeriksa lisensi...${NC}"
 if check_ip_and_get_info "$IP_VPS"; then
 
     # Validasi format tanggal ISO 8601
-    if ! [[ "$exp_date" =~ ^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$ ]]; then
+    if ! [[ "$exp_date" =~ ^(LIFETIME|[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]))$ ]]; then
         echo -e "${RED}❌ Format tanggal invalid: '$exp_date' (harus YYYY-MM-DD)${NC}"
         exit 1
     fi
