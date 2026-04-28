@@ -1,12 +1,47 @@
+#!/bin/bash
+LOG="/var/log/xray/access.log"
+CONFIG="/etc/xray/config.json"
+API="127.0.0.1:10085"
+LIMIT_LOG="/var/log/limitvless.log"
+
+while true; do
+    declare -A USER_IP
+    waktu=$(date -d '2 minutes ago' '+%Y/%m/%d %H:%M')
+    
+    while read -r line; do
+        email=$(echo "$line" | awk '{print $2}' | cut -d. -f1)
+        ip=$(echo "$line" | awk '{print $3}' | cut -d: -f1)
+        [[ -n $email && -n $ip ]] && USER_IP[$email]+="$ip "
+    done < <(grep "$waktu" $LOG)
+
+    grep "^[[:space:]]*// #!" $CONFIG | while read -r line; do
+        user=$(echo "$line" | awk '{print $3}')
+        limit=$(echo "$line" | awk '{print $5}')
+        [[ -z $limit ]] && limit=1
+        
+        ip_unik=$(echo ${USER_IP[$user]} | tr ' ' '\n' | sort -u | grep -v '^$')
+        ip_count=$(echo "$ip_unik" | grep -v '^$' | wc -l)
+
+        if [[ $ip_count -gt $limit ]]; then
+            echo "$(date '+%F %T') - $user over limit $ip_count/$limit | IP: $ip_unik" >> $LIMIT_LOG
+            xray api adu -s $API "email: $user" >> $LIMIT_LOG 2>&1
+        fi
+    done
+    sleep 60
+done
+EOF
+
+chmod +x /etc/xray/limit.vless
+
+cat > /etc/systemd/system/limitvless.service << 'EOF'
 [Unit]
-Description=Limit Usage Xray Service
-Documentation=FighterTunnel
-After=syslog.target network-online.target
-
+Description=Xray VLESS IP Limit
+After=xray.service
 [Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/etc/xray/limit.vless
-
+Type=simple
+ExecStart=/bin/bash /etc/xray/limit.vless
+Restart=always
 [Install]
 WantedBy=multi-user.target
+EOF
+
