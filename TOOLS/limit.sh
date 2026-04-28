@@ -1,81 +1,42 @@
 #!/bin/bash
-REPO="https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/"
+REPO="https://raw.githubusercontent.com/mylo1998/Mylo/main/TOOLS"
 
-wget -q -O /etc/systemd/system/limitvmess.service "${REPO}TOOLS/limitvmess.service" && chmod +x limitvmess.service >/dev/null 2>&1
-wget -q -O /etc/systemd/system/limitvless.service "${REPO}TOOLS/limitvless.service" && chmod +x limitvless.service >/dev/null 2>&1
-wget -q -O /etc/systemd/system/limittrojan.service "${REPO}TOOLS/limittrojan.service" && chmod +x limittrojan.service >/dev/null 2>&1
-wget -q -O /etc/systemd/system/limitshadowsocks.service "${REPO}TOOLS/limitshadowsocks.service" && chmod +x limitshadowsocks.service >/dev/null 2>&1
-wget -q -O /etc/xray/limit.vmess "${REPO}bin/vmess" >/dev/null 2>&1
-wget -q -O /etc/xray/limit.vless "${REPO}bin/vless" >/dev/null 2>&1
-wget -q -O /etc/xray/limit.trojan "${REPO}bin/trojan" >/dev/null 2>&1
-wget -q -O /etc/xray/limit.shadowsocks "${REPO}bin/shadowsocks" >/dev/null 2>&1
-chmod +x /etc/xray/limit.vmess
-chmod +x /etc/xray/limit.vless
-chmod +x /etc/xray/limit.trojan
-chmod +x /etc/xray/limit.shadowsocks
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+
+echo -e "${green}Installing Limit IP VLESS/VMESS/SSH...${NC}"
+wget -q -O /etc/xray/limit.sh https://raw.githubusercontent.com/username/limit-ip/main/limit.sh
+wget -q -O /usr/bin/limit-ssh https://raw.githubusercontent.com/username/limit-ip/main/limit-ssh.sh
+chmod +x /etc/xray/limit.sh /usr/bin/limit-ssh
+
+cat > /etc/systemd/system/limitvless.service << EOF
+[Unit]
+Description=Limit IP Xray Service
+After=network.target
+
+[Service]
+ExecStart=/etc/xray/limit.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /etc/systemd/system/limitssh.service << EOF
+[Unit]
+Description=Limit IP SSH Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/limit-ssh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl daemon-reload
-systemctl enable --now limitvmess
-systemctl enable --now limitvless
-systemctl enable --now limittrojan
-systemctl enable --now limitshadowsocks
-
-cd
-wget -q -O /usr/bin/limit-ip "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/files/limit-ip"
-chmod +x /usr/bin/*
-cd /usr/bin
-sed -i 's/\r//' limit-ip
-cd
-clear
-# // SERVICE LIMIT IP VMESS
-cat >/etc/systemd/system/vmip.service << EOF
-[Unit]
-Description=My
-ProjectAfter=network.target
-
-[Service]
-WorkingDirectory=/root
-ExecStart=/usr/bin/limit-ip vmip
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# // SERVICE LIMIT IP VLESS
-cat >/etc/systemd/system/vlip.service << EOF
-[Unit]
-Description=My
-ProjectAfter=network.target
-
-[Service]
-WorkingDirectory=/root
-ExecStart=/usr/bin/limit-ip vlip
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# // SERVICE LIMIT TROJAN
-cat >/etc/systemd/system/trip.service << EOF
-[Unit]
-Description=My
-ProjectAfter=network.target
-
-[Service]
-WorkingDirectory=/root
-ExecStart=/usr/bin/limit-ip trip
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl restart vmip
-systemctl enable vmip
-systemctl restart vlip
-systemctl enable vlip
-systemctl restart trip
-systemctl enable trip
-
-rm -rf /root/fv-tunnel
+systemctl enable limitvless limitssh
+systemctl restart limitvless limitssh
+echo -e "${green}Done! Check: systemctl status limitvless${NC}"
