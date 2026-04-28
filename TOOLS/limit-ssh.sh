@@ -1,4 +1,5 @@
 #!/bin/bash
+
 LIMIT_LOG="/var/log/limitssh.log"
 while true; do
     for user in $(who | awk '{print $1}' | sort -u); do
