@@ -1,4 +1,4 @@
-cat > /etc/systemd/system/limitvless.service << EOF
+cat > /etc/systemd/system/limitvless.service << 'EOF'
 [Unit]
 Description=Xray VLESS IP Limit via API
 After=network.target
@@ -8,6 +8,8 @@ Type=simple
 ExecStart=/bin/bash /etc/xray/limit.vless
 Restart=always
 RestartSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Install]
 WantedBy=multi-user.target
