@@ -115,7 +115,20 @@ cat > /etc/xray/config.json << END
   "log" : {
     "access": "/var/log/xray/access.log",
     "error": "/var/log/xray/error.log",
-    "loglevel": "info"
+    "loglevel": "warning"
+  },
+  "stats":{},
+  "api":{
+    "tag": "api",
+    "services": ["StatsService"]
+  },
+  "policy":{
+      "levels":{
+        "0":{
+          "statsUserUplink": true
+          "statUserDownlink": true
+        }
+     }
   },
   "inbounds": [
       {
@@ -136,6 +149,8 @@ cat > /etc/xray/config.json << END
             "clients": [
                {
                  "id": "${uuid}"
+                 "email": "user1",
+                 "level": 0
 #vless
              }
           ]
