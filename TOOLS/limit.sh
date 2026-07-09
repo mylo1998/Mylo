@@ -1,36 +1,49 @@
 #!/bin/bash
+
 REPO="https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/"
 
-wget -q -O /etc/systemd/system/limitvmess.service "${REPO}TOOLS/limitvmess.service" && chmod +x limitvmess.service >/dev/null 2>&1
-wget -q -O /etc/systemd/system/limitvless.service "${REPO}TOOLS/limitvless.service" && chmod +x limitvless.service >/dev/null 2>&1
-wget -q -O /etc/systemd/system/limittrojan.service "${REPO}TOOLS/limittrojan.service" && chmod +x limittrojan.service >/dev/null 2>&1
-wget -q -O /etc/systemd/system/limitshadowsocks.service "${REPO}TOOLS/limitshadowsocks.service" && chmod +x limitshadowsocks.service >/dev/null 2>&1
-wget -q -O /etc/xray/limit.vmess "${REPO}bin/vmess" >/dev/null 2>&1
-wget -q -O /etc/xray/limit.vless "${REPO}bin/vless" >/dev/null 2>&1
-wget -q -O /etc/xray/limit.trojan "${REPO}bin/trojan" >/dev/null 2>&1
-wget -q -O /etc/xray/limit.shadowsocks "${REPO}bin/shadowsocks" >/dev/null 2>&1
+# Download limit service
+wget -q -O /etc/systemd/system/limitvmess.service "${REPO}TOOLS/limitvmess.service" || exit 1
+wget -q -O /etc/systemd/system/limitvless.service "${REPO}TOOLS/limitvless.service" || exit 1
+wget -q -O /etc/systemd/system/limittrojan.service "${REPO}TOOLS/limittrojan.service" || exit 1
+wget -q -O /etc/systemd/system/limitshadowsocks.service "${REPO}TOOLS/limitshadowsocks.service" || exit 1
+
+chmod +x /etc/systemd/system/*.service
+
+
+# Download limit binary
+wget -q -O /etc/xray/limit.vmess "${REPO}bin/vmess" || exit 1
+wget -q -O /etc/xray/limit.vless "${REPO}bin/vless" || exit 1
+wget -q -O /etc/xray/limit.trojan "${REPO}bin/trojan" || exit 1
+wget -q -O /etc/xray/limit.shadowsocks "${REPO}bin/shadowsocks" || exit 1
+
 chmod +x /etc/xray/limit.vmess
 chmod +x /etc/xray/limit.vless
 chmod +x /etc/xray/limit.trojan
 chmod +x /etc/xray/limit.shadowsocks
+
+
 systemctl daemon-reload
+
 systemctl enable --now limitvmess
 systemctl enable --now limitvless
 systemctl enable --now limittrojan
 systemctl enable --now limitshadowsocks
 
-cd
-wget -q -O /usr/bin/limit-ip "https://raw.githubusercontent.com/mylo1998/Mylo/refs/heads/main/files/limit-ip"
-chmod +x /usr/bin/*
-cd /usr/bin
-sed -i 's/\r//' limit-ip
-cd
-clear
-# // SERVICE LIMIT IP VMESS
-cat >/etc/systemd/system/vmip.service << EOF
+
+# Download limit-ip
+wget -q -O /usr/bin/limit-ip "${REPO}files/limit-ip" || exit 1
+
+chmod +x /usr/bin/limit-ip
+
+sed -i 's/\r$//' /usr/bin/limit-ip
+
+
+# VMESS IP LIMIT
+cat >/etc/systemd/system/vmip.service <<EOF
 [Unit]
-Description=My
-ProjectAfter=network.target
+Description=VMESS IP Limit
+After=network.target
 
 [Service]
 WorkingDirectory=/root
@@ -41,11 +54,12 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-# // SERVICE LIMIT IP VLESS
-cat >/etc/systemd/system/vlip.service << EOF
+
+# VLESS IP LIMIT
+cat >/etc/systemd/system/vlip.service <<EOF
 [Unit]
-Description=My
-ProjectAfter=network.target
+Description=VLESS IP Limit
+After=network.target
 
 [Service]
 WorkingDirectory=/root
@@ -56,11 +70,12 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-# // SERVICE LIMIT TROJAN
-cat >/etc/systemd/system/trip.service << EOF
+
+# TROJAN IP LIMIT
+cat >/etc/systemd/system/trip.service <<EOF
 [Unit]
-Description=My
-ProjectAfter=network.target
+Description=TROJAN IP Limit
+After=network.target
 
 [Service]
 WorkingDirectory=/root
@@ -70,12 +85,19 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
+
+
 systemctl daemon-reload
-systemctl restart vmip
+
+
 systemctl enable vmip
-systemctl restart vlip
+systemctl restart vmip
+
 systemctl enable vlip
-systemctl restart trip
+systemctl restart vlip
+
 systemctl enable trip
+systemctl restart trip
+
 
 rm -rf /root/fv-tunnel
