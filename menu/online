@@ -1,73 +1,51 @@
-online-ip(){
+online(){
 
 clear
 
-echo -e "\033[36m╭════════════════════════════════════╮\033[0m"
-echo -e "\033[36m│     XRAY ONLINE USER + IP LIMIT    │\033[0m"
-echo -e "\033[36m╰════════════════════════════════════╯\033[0m"
+echo -e "\033[36m╭══════════════════════════════════╮\033[0m"
+echo -e "\033[36m│   VLESS ONLINE + IP LIMIT        │\033[0m"
+echo -e "\033[36m╰══════════════════════════════════╯\033[0m"
 
-LOG="/var/log/xray/access.log"
+
 NGINX="/var/log/nginx/access.log"
 
-if [ -f "$LOG" ]; then
-    FILE=$LOG
-else
-    FILE=$NGINX
+
+if [ ! -f $NGINX ]; then
+echo "Nginx log tiada"
+read -n1
+menu
 fi
 
 
-grep "email:" $FILE | \
-awk '
-{
- for(i=1;i<=NF;i++)
- {
-   if($i=="email:")
-   {
-      user=$(i+1)
-   }
-
-   if($i ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/)
-   {
-      ip=$i
-   }
- }
-
- if(user!="" && ip!="")
- {
- print user,ip
- }
-}' | sort -u > /tmp/xray-online
+grep "/vless" $NGINX | tail -100 | awk '{print $1}' | sort -u > /tmp/vless-ip
 
 
-if [ ! -s /tmp/xray-online ]; then
+if [ ! -s /tmp/vless-ip ]; then
 
-echo -e "\033[31mTiada user online\033[0m"
+echo "Tiada user online"
 
 else
-
-cat /tmp/xray-online | while read user ip
-do
-
-COUNT=$(grep "^$user " /tmp/xray-online | awk '{print $2}' | sort -u | wc -l)
-
-echo -e "\033[34m━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "USER      : \033[33m$user\033[0m"
-echo -e "IP ONLINE : \033[32m$ip\033[0m"
-echo -e "IP COUNT  : $COUNT"
-
-if [ "$COUNT" -gt 1 ]; then
-echo -e "STATUS    : \033[31mOVER LIMIT\033[0m"
-else
-echo -e "STATUS    : \033[32mOK\033[0m"
-fi
-
-done
-
-fi
-
 
 echo ""
-read -n1 -s -r -p "Tekan apa-apa untuk kembali"
+
+echo "IP ONLINE:"
+cat /tmp/vless-ip
+
+echo ""
+
+TOTAL=$(cat /tmp/vless-ip | wc -l)
+
+echo "TOTAL IP : $TOTAL"
+
+echo ""
+
+fi
+
+
+echo "=============================="
+
+read -n1 -s -r -p "Back menu"
+
 menu
 
 }
