@@ -3,83 +3,71 @@ online-ip(){
 clear
 
 echo -e "\033[36m╭════════════════════════════════════╮\033[0m"
-echo -e "\033[36m│     XRAY ONLINE + IP LIMIT         │\033[0m"
+echo -e "\033[36m│     XRAY ONLINE USER + IP LIMIT    │\033[0m"
 echo -e "\033[36m╰════════════════════════════════════╯\033[0m"
 
-
 LOG="/var/log/xray/access.log"
+NGINX="/var/log/nginx/access.log"
 
-if [ ! -f $LOG ]; then
-    echo "Log Xray tidak jumpa"
-    read -n1
-    menu
+if [ -f "$LOG" ]; then
+    FILE=$LOG
+else
+    FILE=$NGINX
 fi
 
 
-echo ""
+grep "email:" $FILE | \
+awk '
+{
+ for(i=1;i<=NF;i++)
+ {
+   if($i=="email:")
+   {
+      user=$(i+1)
+   }
 
-grep "email:" $LOG | tail -100 | while read line
+   if($i ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/)
+   {
+      ip=$i
+   }
+ }
+
+ if(user!="" && ip!="")
+ {
+ print user,ip
+ }
+}' | sort -u > /tmp/xray-online
+
+
+if [ ! -s /tmp/xray-online ]; then
+
+echo -e "\033[31mTiada user online\033[0m"
+
+else
+
+cat /tmp/xray-online | while read user ip
 do
 
-USER=$(echo "$line" | awk -F'email:' '{print $2}' | awk '{print $1}')
-
-IP=$(echo "$line" | grep -oE 'tcp:[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | cut -d: -f2)
-
-
-if [[ -n $USER && -n $IP ]]; then
-
+COUNT=$(grep "^$user " /tmp/xray-online | awk '{print $2}' | sort -u | wc -l)
 
 echo -e "\033[34m━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "USER      : \033[33m$user\033[0m"
+echo -e "IP ONLINE : \033[32m$ip\033[0m"
+echo -e "IP COUNT  : $COUNT"
 
-echo -e "USER      : \033[33m$USER\033[0m"
-
-echo -e "IP ONLINE : \033[33m$IP\033[0m"
-
-
-# kira jumlah IP user
-COUNT=$(grep "email: $USER" $LOG | \
-grep -oE 'tcp:[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
-cut -d: -f2 | sort -u | wc -l)
-
-
-echo -e "TOTAL IP  : \033[33m$COUNT\033[0m"
-
-
-# baca limit IP
-if [ -f /etc/vless/${USER}IP ]; then
-
-LIMIT=$(cat /etc/vless/${USER}IP)
-
-else
-
-LIMIT="1"
-
-fi
-
-
-echo -e "IP LIMIT  : \033[33m$LIMIT\033[0m"
-
-
-if [ "$COUNT" -gt "$LIMIT" ]; then
-
+if [ "$COUNT" -gt 1 ]; then
 echo -e "STATUS    : \033[31mOVER LIMIT\033[0m"
-
 else
-
 echo -e "STATUS    : \033[32mOK\033[0m"
-
-fi
-
-
 fi
 
 done
 
+fi
+
 
 echo ""
-
-read -n1 -s -r -p "Press any key back menu"
-
+read -n1 -s -r -p "Tekan apa-apa untuk kembali"
 menu
 
 }
