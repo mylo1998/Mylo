@@ -42,35 +42,86 @@ checking_sc() {
 }
 checking_sc
 clear
-MYIP=$(wget -qO- ipinfo.io/ip);
-clear 
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "         • ALL USER ONLINE MONITOR •         "
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "" 
-echo -e " [\e[36m•1\e[0m] CEK SSHWS ONLINE"
-echo -e " [\e[36m•2\e[0m] CEK VMESS ONLINE"
-echo -e " [\e[36m•3\e[0m] CEK VLESS ONLINE"
-echo -e " [\e[36m•4\e[0m] CEK TROJAN ONLINE"
-echo -e " [\e[36m•5\e[0m] ALL XRAY ONLINE & IP"
-echo -e " [\e[36m•6\e[0m] CEK LIMIT USER"
-echo -e " [\e[36m•7\e[0m] TWEAK TCP/BBR"
+online-ip(){
 
-echo -e "" 
-echo -e " [\e[31m•0\e[0m] \e[31mBack To Menu\033[0m"
-echo -e "" 
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-read -p " Select menu :  "  opt
-echo -e   ""
-case $opt in
-01 | 1) clear ; online-sshws ;;
-02 | 2) clear ; online-vmess ;;
-03 | 3) clear ; online-vless ;;
-04 | 4) clear ; online-trojan ;;
-05 | 5) clear ; online-xray ;;
-06 | 6) clear ; ceklimit ;;
-07 | 7) clear ; m-tcp ;;
-00 | 0) clear ; menu ;;
-*) clear ; online ;;
-esac
+clear
+
+echo -e "${CYAN}╭══════════════════════════════════╮${NC}"
+echo -e "${CYAN}│   XRAY ONLINE + IP LIMIT         │${NC}"
+echo -e "${CYAN}╰══════════════════════════════════╯${NC}"
+
+
+LOG="/var/log/xray/access.log"
+DB="/etc/xray/iplimit.db"
+
+mkdir -p /etc/xray
+touch $DB
+
+
+users=$(grep -E "^#vlg#|^#vmg#" /etc/xray/config.json | awk '{print $2}' | sort -u)
+
+
+for user in $users
+do
+
+data=$(grep -w "email: $user" $LOG | tail -50)
+
+
+if [[ ! -z "$data" ]]; then
+
+
+IP=$(echo "$data" | grep -oE '[0-9]{1,3}(\.[0-9]{1,3}){3}' | sort -u)
+
+COUNT=$(echo "$IP" | wc -l)
+
+
+TYPE="VLESS"
+
+grep -q "^#vmg# $user" /etc/xray/config.json && TYPE="VMESS"
+
+
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━${NC}"
+
+echo -e "USER     : ${YELLOW}$user${NC}"
+echo -e "PROTOCOL : $TYPE"
+
+echo -e "IP LIMIT : 1"
+
+echo -e "IP AKTIF :"
+echo "$IP"
+
+
+OLD=$(grep "^$user " $DB | awk '{print $2}')
+
+
+if [[ -z "$OLD" ]]; then
+
+echo "$user $IP" >> $DB
+
+echo -e "STATUS   : ${GREEN}LOCK IP${NC}"
+
+
+elif [[ "$OLD" != "$IP" ]]; then
+
+echo -e "STATUS   : ${RED}IP BERUBAH${NC}"
+
+
+else
+
+echo -e "STATUS   : ${GREEN}OK${NC}"
+
+fi
+
+
+fi
+
+done
+
+
+echo ""
+read -n1 -s -r -p "Press any key back menu"
+
+menu
+
+}
+
