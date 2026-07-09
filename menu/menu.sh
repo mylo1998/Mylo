@@ -402,7 +402,7 @@ case $opt in
 09 | 9) clear ; m-update ;;
 10 | 10) clear ; system ;;
 11 | 11) clear ; menu-backup;;
-12 | 12) clear ; online-ip;;
+12 | 12) clear ; online;;
 15 | 15) clear ; admin;;
 00 | 0) clear ; menu ;;
 *) clear ; menu ;;
