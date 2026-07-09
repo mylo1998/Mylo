@@ -2,50 +2,46 @@ online(){
 
 clear
 
+LOG="/var/log/xray/access.log"
+CONFIG="/etc/xray/config.json"
+
 echo -e "${cyan}╭════════════════════════════════════╮${NC}"
 echo -e "${cyan}│     XRAY USER ONLINE + IP LIMIT    │${NC}"
 echo -e "${cyan}╰════════════════════════════════════╯${NC}"
 
 
-LOG="/var/log/xray/access.log"
-CONFIG="/etc/xray/config.json"
-DB="/etc/xray/iplimit.db"
-
-
 if [ ! -f $LOG ]; then
-echo -e "${red}Xray log tidak dijumpai${NC}"
+echo -e "${red}Log Xray tidak wujud${NC}"
 read -n1 -s -r -p "Back..."
 menu
 fi
 
 
-touch $DB
-
-
+# Ambil semua user VLESS + VMESS
 users=$(grep -E "#vlg#|#vmg#" $CONFIG | awk '{print $2}' | sort -u)
 
 
 if [ -z "$users" ]; then
-
-echo -e "${red}Tiada user VLESS/VMESS dijumpai${NC}"
-
+echo -e "${red}User tidak dijumpai${NC}"
 else
 
 
 for user in $users
 do
 
-
-LOGUSER=$(grep "email: $user" $LOG | tail -30)
-
-
-if [[ -n "$LOGUSER" ]]; then
+# cari email user dalam log
+line=$(grep -B5 -A2 "email: $user" $LOG | tail -20)
 
 
-IP=$(echo "$LOGUSER" | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort -u)
+if [[ -n "$line" ]]; then
 
 
-COUNT=$(echo "$IP" | wc -l)
+IP=$(echo "$line" | grep -oE 'tcp:[0-9]{1,3}(\.[0-9]{1,3}){3}' | sed 's/tcp://' | sort -u)
+
+
+if [ -z "$IP" ]; then
+continue
+fi
 
 
 if grep -q "#vmg# $user" $CONFIG; then
@@ -55,39 +51,23 @@ TYPE="VLESS"
 fi
 
 
+COUNT=$(echo "$IP" | wc -l)
+
 
 echo -e "${blue}━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
 echo -e "${Lyellow}USER     :${NC} $user"
-echo -e "${Lyellow}PROTOCOL :${NC} $TYPE"
-
+echo -e "${Lyellow}TYPE     :${NC} $TYPE"
 echo -e "${Lyellow}IP ONLINE:${NC}"
 
 echo "$IP"
 
 echo -e "${Lyellow}TOTAL IP :${NC} $COUNT"
 
-
 # IP LIMIT
-LIMIT="1"
+if [ $COUNT -gt 1 ]; then
 
-
-OLD=$(grep "^$user|" $DB | cut -d "|" -f2)
-
-
-if [ -z "$OLD" ]; then
-
-SAVE=$(echo "$IP" | head -1)
-
-echo "$user|$SAVE" >> $DB
-
-echo -e "STATUS   : ${Lgreen}LOCK IP${NC}"
-
-
-elif [ "$OLD" != "$(echo "$IP" | head -1)" ]; then
-
-echo -e "STATUS   : ${red}IP BERUBAH${NC}"
-
+echo -e "STATUS   : ${red}IP LEBIH 1${NC}"
 
 else
 
@@ -98,7 +78,6 @@ fi
 
 fi
 
-
 done
 
 fi
@@ -106,6 +85,7 @@ fi
 
 echo -e "${blue}━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
+echo ""
 read -n1 -s -r -p "Press any key back menu"
 
 menu
