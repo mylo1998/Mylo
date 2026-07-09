@@ -1,77 +1,72 @@
-online(){
+online-ip(){
 
 clear
 
+echo -e "\033[36m╭════════════════════════════════════╮\033[0m"
+echo -e "\033[36m│     XRAY ONLINE + IP LIMIT         │\033[0m"
+echo -e "\033[36m╰════════════════════════════════════╯\033[0m"
+
+
 LOG="/var/log/xray/access.log"
-CONFIG="/etc/xray/config.json"
-
-echo -e "${cyan}╭════════════════════════════════════╮${NC}"
-echo -e "${cyan}│     XRAY USER ONLINE + IP LIMIT    │${NC}"
-echo -e "${cyan}╰════════════════════════════════════╯${NC}"
-
 
 if [ ! -f $LOG ]; then
-echo -e "${red}Log Xray tidak wujud${NC}"
-read -n1 -s -r -p "Back..."
-menu
+    echo "Log Xray tidak jumpa"
+    read -n1
+    menu
 fi
 
 
-# Ambil semua user VLESS + VMESS
-users=$(grep -E "#vlg#|#vmg#" $CONFIG | awk '{print $2}' | sort -u)
+echo ""
 
-
-if [ -z "$users" ]; then
-echo -e "${red}User tidak dijumpai${NC}"
-else
-
-
-for user in $users
+grep "email:" $LOG | tail -100 | while read line
 do
 
-# cari email user dalam log
-line=$(grep -B5 -A2 "email: $user" $LOG | tail -20)
+USER=$(echo "$line" | awk -F'email:' '{print $2}' | awk '{print $1}')
+
+IP=$(echo "$line" | grep -oE 'tcp:[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | cut -d: -f2)
 
 
-if [[ -n "$line" ]]; then
+if [[ -n $USER && -n $IP ]]; then
 
 
-IP=$(echo "$line" | grep -oE 'tcp:[0-9]{1,3}(\.[0-9]{1,3}){3}' | sed 's/tcp://' | sort -u)
+echo -e "\033[34m━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+
+echo -e "USER      : \033[33m$USER\033[0m"
+
+echo -e "IP ONLINE : \033[33m$IP\033[0m"
 
 
-if [ -z "$IP" ]; then
-continue
-fi
+# kira jumlah IP user
+COUNT=$(grep "email: $USER" $LOG | \
+grep -oE 'tcp:[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
+cut -d: -f2 | sort -u | wc -l)
 
 
-if grep -q "#vmg# $user" $CONFIG; then
-TYPE="VMESS"
-else
-TYPE="VLESS"
-fi
+echo -e "TOTAL IP  : \033[33m$COUNT\033[0m"
 
 
-COUNT=$(echo "$IP" | wc -l)
+# baca limit IP
+if [ -f /etc/vless/${USER}IP ]; then
 
-
-echo -e "${blue}━━━━━━━━━━━━━━━━━━━━━━${NC}"
-
-echo -e "${Lyellow}USER     :${NC} $user"
-echo -e "${Lyellow}TYPE     :${NC} $TYPE"
-echo -e "${Lyellow}IP ONLINE:${NC}"
-
-echo "$IP"
-
-echo -e "${Lyellow}TOTAL IP :${NC} $COUNT"
-
-# IP LIMIT
-if [ $COUNT -gt 1 ]; then
-
-echo -e "STATUS   : ${red}IP LEBIH 1${NC}"
+LIMIT=$(cat /etc/vless/${USER}IP)
 
 else
 
-echo -e "STATUS   : ${Lgreen}NORMAL${NC}"
+LIMIT="1"
+
+fi
+
+
+echo -e "IP LIMIT  : \033[33m$LIMIT\033[0m"
+
+
+if [ "$COUNT" -gt "$LIMIT" ]; then
+
+echo -e "STATUS    : \033[31mOVER LIMIT\033[0m"
+
+else
+
+echo -e "STATUS    : \033[32mOK\033[0m"
 
 fi
 
@@ -80,12 +75,9 @@ fi
 
 done
 
-fi
-
-
-echo -e "${blue}━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
 echo ""
+
 read -n1 -s -r -p "Press any key back menu"
 
 menu
