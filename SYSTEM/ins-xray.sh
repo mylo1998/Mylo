@@ -469,6 +469,52 @@ sed -i '$ iproxy_set_header X-Real-IP $http_x_forwarded_for;' /etc/nginx/conf.d/
 sed -i '$ iproxy_set_header X-Forwarded-For $http_x_forwarded_for;' /etc/nginx/conf.d/xray.conf
 sed -i '$ i}' /etc/nginx/conf.d/xray.conf
 
+# ===== AUTO FIX XRAY =====
+
+echo "========== AUTO FIX XRAY =========="
+
+XRAY_BIN="/usr/local/bin/xray"
+XRAY_CONFIG="/etc/xray/config.json"
+XRAY_LOG_DIR="/var/log/xray"
+XRAY_DATA_URL="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download"
+
+systemctl daemon-reload
+
+XRAY_USER="$(systemctl show xray -p User --value 2>/dev/null)"
+[ -n "$XRAY_USER" ] || XRAY_USER="www-data"
+XRAY_GROUP="$(id -gn "$XRAY_USER")"
+
+echo "[1/4] Repair Xray log permission..."
+install -d -o "$XRAY_USER" -g "$XRAY_GROUP" -m 0755 "$XRAY_LOG_DIR"
+
+for FILE in access.log error.log access2.log error2.log; do
+    touch "$XRAY_LOG_DIR/$FILE"
+    chown "$XRAY_USER:$XRAY_GROUP" "$XRAY_LOG_DIR/$FILE"
+    chmod 0644 "$XRAY_LOG_DIR/$FILE"
+done
+
+echo "[2/4] Download geosite.dat and geoip.dat..."
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+for FILE in geosite.dat geoip.dat; do
+    curl -fL --retry 2 --connect-timeout 15 \
+        "$XRAY_DATA_URL/$FILE" -o "$TMP_DIR/$FILE" || exit 1
+    test -s "$TMP_DIR/$FILE" || exit 1
+done
+
+install -m 0644 "$TMP_DIR/geosite.dat" /usr/local/bin/geosite.dat
+install -m 0644 "$TMP_DIR/geoip.dat" /usr/local/bin/geoip.dat
+
+echo "[3/4] Test Xray configuration..."
+if ! "$XRAY_BIN" run -test -config "$XRAY_CONFIG"; then
+    echo "ERROR: Xray configuration failed!"
+    exit 1
+fi
+
+echo "[4/4] AUTO FIX XRAY SUCCESS!"
+
+# ===== RESTART SERVICE =====
 echo -e "$yell[SERVICE]$NC Restart All service"
 systemctl daemon-reload
 sleep 0.5
